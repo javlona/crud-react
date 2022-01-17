@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Table from './components/Table'
 import Form from './components/Form'
-import Modal from './components/Modal'
+// import Modal from './components/Modal'
 
 import './App.css';
 
@@ -35,6 +35,12 @@ class App extends Component {
         this.setState({selectedUser: user});
     }
 
+    addHandler = (user) => {
+        this.setState({
+            users: [...this.state.users, user]
+        })
+    }
+
     render() {
         const { isLoading, users } = this.state
         if(isLoading) return <h1>Content loading...</h1>
@@ -44,7 +50,7 @@ class App extends Component {
         return (
             <div className="App">
                 <h1>React CRUD operations</h1>
-                <Form />
+                <Form addHandler={ this.addHandler }/>
                 <Table 
                     users={ users }
                     deleteHandler={ this.deleteHandler }
