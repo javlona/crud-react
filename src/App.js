@@ -1,4 +1,8 @@
 import React, {Component} from 'react';
+import Table from './components/Table'
+import Form from './components/Form'
+import Modal from './components/Modal'
+
 import './App.css';
 
 class App extends Component {
@@ -9,6 +13,7 @@ class App extends Component {
             isLoading: false,
             users: [],
             selectedUser: {},
+            isModalShown: false,
         }
     }
     
@@ -39,46 +44,12 @@ class App extends Component {
         return (
             <div className="App">
                 <h1>React CRUD operations</h1>
-                <form>
-                    <input type="text" placeholder="Name"/>
-                    <input type="email" placeholder="Email"/>
-                    <input type="text" placeholder="Username"/>
-                    <input type="tel" placeholder="Phone"/>
-                    <input type="text" placeholder="City"/>
-                    <button type="submit">
-                        Add
-                    </button>
-                </form>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Username</th>
-                            <th>Phone</th>
-                            <th>City</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            users.map(user => (
-                                <tr key={ user.id }>
-                                    <td>{ user.name.firstname } { user.name.lastname }</td>
-                                    <td>{ user.email }</td>
-                                    <td>{ user.username }</td>
-                                    <td>{ user.phone }</td>
-                                    <td>{ user.address.city }</td>
-                                    <td>
-                                        <button onClick={() => this.deleteHandler(user.id)}>delete</button>
-                                        <button onClick={() => this.editHandler(user.id)}>edit</button>
-                                    </td>
-
-                                </tr>
-                            ))
-                        }
-                    </tbody>
-                </table>
+                <Form />
+                <Table 
+                    users={ users }
+                    deleteHandler={ this.deleteHandler }
+                    editHandler={ this.editHandler }
+                />
             </div>
         )
     }
