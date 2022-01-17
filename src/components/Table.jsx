@@ -2,7 +2,7 @@ import react, { Component} from "react";
 
 class Table extends Component {
     render() {
-        const { users, deleteHandler, editHandler } = this.props;
+        const { users, deleteHandler, selectUser } = this.props;
 
         return (
             <table>
@@ -27,7 +27,7 @@ class Table extends Component {
                                     <td>{ user.address.city }</td>
                                     <td>
                                         <button onClick={() => deleteHandler(user.id)}>delete</button>
-                                        <button onClick={() => editHandler(user.id)}>edit</button>
+                                        <button onClick={() => selectUser(user.id)}>edit</button>
                                     </td>
 
                                 </tr>

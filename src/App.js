@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Table from './components/Table'
 import Form from './components/Form'
-// import Modal from './components/Modal'
+import Modal from './components/Modal'
 
 import './App.css';
 
@@ -30,9 +30,9 @@ class App extends Component {
         this.setState({users: users})
     }
 
-    editHandler = (id) => {
+    selectUser = (id) => {
         const user = this.state.users.find(user => user.id === id)
-        this.setState({selectedUser: user});
+        this.setState({selectedUser: user, isModalShown: true});
     }
 
     addHandler = (user) => {
@@ -41,8 +41,15 @@ class App extends Component {
         })
     }
 
+    closeModal = () => this.setState({isModalShown: false})
+    
+    updateUser = (user) => {
+        const updatedUsers = this.state.users.map(item => item.id === user.id ? { ...item, ...user } : item)
+        this.setState({users: updatedUsers})
+    }
+
     render() {
-        const { isLoading, users } = this.state
+        const { isLoading, users, selectedUser, isModalShown } = this.state
         if(isLoading) return <h1>Content loading...</h1>
 
         console.log(this.state)
@@ -54,8 +61,14 @@ class App extends Component {
                 <Table 
                     users={ users }
                     deleteHandler={ this.deleteHandler }
-                    editHandler={ this.editHandler }
+                    selectUser={ this.selectUser }
                 />
+                {isModalShown && <Modal 
+                    user={ selectedUser } 
+                    closeModal={ this.closeModal }
+                    updateUser={ this.updateUser }
+                    />
+                }
             </div>
         )
     }
