@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Table from './components/Table'
 import Form from './components/Form'
 import Modal from './components/Modal'
+import { Routes, Route, Link } from "react-router-dom";
 
 import './App.css';
 
